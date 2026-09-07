@@ -1,0 +1,16 @@
+# ---------------------------------------------------------------------------
+# Copy to .env.local for `npm run dev`.
+# For Cloudflare, set these as Worker secrets instead — see docs/SETUP.md.
+# Never commit real values. Never prefix a secret with NEXT_PUBLIC_.
+# ---------------------------------------------------------------------------
+
+# Safe to expose to the browser. The anon key only ever acts as the signed-in
+# user, and every table is protected by row-level security.
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR-PROJECT.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+
+# SERVER ONLY. This key bypasses row-level security completely. It is used for
+# exactly two things: writing extracted page text, and minting short-lived
+# download links. If this ever reaches browser code, every organization's
+# private documents are readable by every user.
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key

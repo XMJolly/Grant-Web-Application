@@ -1,0 +1,15 @@
+node_modules/
+.next/
+.open-next/
+out/
+build/
+.env
+.env.local
+.dev.vars
+*.log
+.DS_Store
+.wrangler/
+cloudflare-env.d.ts
+next-env.d.ts
+samples/*
+!samples/README.md

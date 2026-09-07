@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+/*
+ * GrantPath design tokens.
+ *
+ * Taken from the Figma prototype spec in the project handoff, Appendix A:
+ * navy sidebar, teal accent, green for verified, amber for warnings, red kept
+ * for genuinely critical states only, on a warm background.
+ *
+ * The semantic names matter more than the hex values. "verified" and "needs
+ * review" are product states with real consequences — a verified fact may be
+ * used in an export, an unverified one may not — so they get their own tokens
+ * rather than being spelled as arbitrary greens and ambers at each call site.
+ */
+@theme {
+  --color-ink: #0f172a;
+  --color-ink-soft: #475569;
+  --color-ink-faint: #64748b;
+
+  --color-canvas: #faf8f5;
+  --color-surface: #ffffff;
+  --color-line: #e7e2db;
+
+  --color-navy-800: #14243d;
+  --color-navy-900: #0d1a2d;
+  --color-navy-700: #1e3557;
+
+  --color-teal-50: #eef8f8;
+  --color-teal-200: #a5dadb;
+  --color-teal-600: #0d7377;
+  --color-teal-700: #0a5a5d;
+
+  --color-verified-50: #edf7ef;
+  --color-verified-200: #b4dfc0;
+  --color-verified-700: #1e7a3f;
+
+  --color-warn-50: #fdf6e8;
+  --color-warn-200: #f2ddaa;
+  --color-warn-700: #96650b;
+
+  --color-critical-50: #fdeeee;
+  --color-critical-200: #f4c2c2;
+  --color-critical-700: #b02b2b;
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+html {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* A visible focus ring everywhere. The target user is often keyboard-driven
+   and this is the cheapest accessibility win available. */
+:focus-visible {
+  outline: 2px solid var(--color-teal-600);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
