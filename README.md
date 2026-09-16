@@ -11,6 +11,25 @@ reaches an export without a person approving it.
 **Status: Milestone 1.** The tenant boundary is built and verified. No AI yet —
 see [`docs/MILESTONES.md`](docs/MILESTONES.md).
 
+## Screens
+
+![The document library](screenshots/documents.png)
+
+**One library, three outcomes.** A 52-page Maryland Department of Health RFA
+read into 52 citable pages; two funder applications stored safely and marked
+unreadable because they are scans with no text in them.
+
+That refusal is the point. A scanned page yields an empty string rather than an
+error, so without the check both of those would sit there looking successfully
+processed, and every fact later drawn from them would have no support behind it.
+
+![Dashboard](screenshots/dashboard.png)
+
+**The dashboard shows only what the organization actually entered.** The panels
+it cannot yet fill say so and name the phase that builds them. On a product
+whose whole promise is not inventing things, a placeholder "3 opportunities"
+tile would be the wrong first habit.
+
 ## What works today
 
 - Email/password accounts
@@ -97,6 +116,7 @@ src/lib/extract/       Turning uploaded bytes into citable page text.
 src/lib/supabase/      Three clients: user, browser, and service role.
 src/app/(app)/         Signed-in application.
 docs/                  Decisions and their tradeoffs; the milestone plan.
+screenshots/           Images used by this README.
 ```
 
 ## Reading order for a new contributor
@@ -109,6 +129,28 @@ docs/                  Decisions and their tradeoffs; the milestone plan.
 The security model is not a separate document: it is the policies in
 `0001_core.sql` and the assertions in `01_isolation.sql`. Every policy has a
 comment above it saying what it is protecting against.
+
+## Reporting a security issue
+
+This holds nonprofits' financial statements and board lists, so a report is
+genuinely welcome. Email **xmjolly@gmail.com** with what you found and how to
+reproduce it, and please don't open a public issue for anything exploitable.
+
+It is a one-person project, so expect a reply in days rather than hours. Known
+weaknesses are listed below — those are already understood, and reports about
+them are not needed.
+
+**Known gaps, as of Milestone 1.** None block a pilot; all should close before
+anyone relies on this.
+
+- No rate limiting on sign-in or upload
+- No retention or deletion path — `organizations` has no delete policy at all
+- No virus scanning on uploads
+- Password policy is length-only (10 characters); no multi-factor authentication
+- `document_pages.content` is stored as plaintext in the database, as it must be
+  to stay searchable and citable. Encryption at rest is Supabase's, not ours
+- Nothing is sent to an AI provider yet. Before that changes, users have to be
+  told plainly what leaves the system and where it goes
 
 ## Not being built
 

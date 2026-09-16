@@ -35,11 +35,16 @@ to D1 later would not be.
 **Decision.** PDFs and Word files are read for their text layer. A document
 without one is stored, marked "Scan — cannot read", and produces no facts.
 
-**Why.** **Fact:** the one real grant application in the source material —
-`EconoLease Community Grant Application.pdf` — is 8 pages of scanned images
-with zero extractable characters. Verified in this workspace. **Assumption:**
-that is common rather than unlucky, because small funders and county offices
-circulate printed-then-scanned forms.
+**Why.** **Fact:** of the three real funder documents now loaded into a running
+instance, **two cannot be read at all** — the EconoLease Community Grant
+Application (8 pages of scanned images, zero extractable characters) and the
+Looking Out Foundation application. Only the Maryland Department of Health MOTA
+RFA, a born-digital state document, parsed — into 52 pages.
+
+That was recorded here as an assumption when only one sample existed. It is no
+longer an assumption. Small funders circulate printed-then-scanned forms, and
+state agencies do not, so the documents a small nonprofit most often receives
+are the ones this product currently cannot read.
 
 The alternative is worse than it looks. A scanned page yields an empty string,
 not an error. Without the check, such a document would be stored as
@@ -50,9 +55,13 @@ Trust Rule, applied one layer earlier.
 The thresholds are in `src/lib/extract/types.ts` and are validated against both
 real PDFs by `npm run test:extract`.
 
-**Cost.** Your own sample grant cannot be processed until OCR exists.
+**Cost.** Two of the three real grant documents on hand cannot be processed
+until OCR exists. That is a larger cost than it looked when this was written.
 
-**When to revisit.** Milestone 3. The likely approach is rendering each page to
+**When to revisit.** Sooner than Milestone 3, on the evidence above — OCR looks
+less like a refinement and more like the difference between working on real
+funder documents and only on state ones. Worth settling in Phase 0 by asking
+pilot organizations what arrives in their inbox. The likely approach is rendering each page to
 an image and using a vision model, keeping the page number so citations still
 work. That needs a Node-capable service — a Cloudflare Container, or Supabase
 Edge Functions — because Workers cannot rasterise a PDF.
