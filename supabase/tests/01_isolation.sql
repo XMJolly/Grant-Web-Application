@@ -270,6 +270,56 @@ select pg_temp.check_denied('anon cannot read page text',
 select pg_temp.check_denied('anon cannot call the membership helper',
   'select app.is_member(''00000000-0000-0000-0000-00000000aaaa'')');
 
+
+\echo ''
+\echo '=== 7. Onboarding: an authenticated user creates an organization ==========='
+-- This section exists because its absence let a real bug through. The fixtures
+-- above insert organizations with RLS bypassed, so organizations_insert was
+-- never exercised by a genuine `authenticated` caller, and the onboarding path
+-- shipped broken.
+
+reset role;
+insert into auth.users (id, email)
+values ('00000000-0000-0000-0000-0000000000e5', 'erin@newnonprofit.example');
+
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000e5';
+
+insert into public.organizations (id, legal_name, service_area_state, created_by)
+values ('00000000-0000-0000-0000-00000000eeee', 'Erin''s Nonprofit', 'MD',
+        '00000000-0000-0000-0000-0000000000e5');
+select pg_temp.check_true('a signed-in user can create their own organization', true);
+
+select pg_temp.check_eq('the creator becomes its administrator',
+  (select count(*) from public.organization_members
+    where organization_id = '00000000-0000-0000-0000-00000000eeee' and role = 'admin'), 1);
+
+select pg_temp.check_eq('the creator can read it back afterwards',
+  (select count(*) from public.organizations
+    where id = '00000000-0000-0000-0000-00000000eeee'), 1);
+
+select pg_temp.check_eq('and still sees no other organization',
+  (select count(*) from public.organizations), 1);
+
+-- The regression guard. INSERT ... RETURNING — which is what chaining .select()
+-- onto .insert() produces — must fail, because organizations_select requires a
+-- membership row that the AFTER INSERT trigger has not created yet. Application
+-- code must generate the id itself instead. See src/app/onboarding/actions.ts.
+select pg_temp.check_denied(
+  'INSERT ... RETURNING is refused, so app code must not chain .select()', $sql$
+  insert into public.organizations (legal_name, service_area_state, created_by)
+  values ('Returning Org', 'MD', '00000000-0000-0000-0000-0000000000e5')
+  returning id
+$sql$);
+
+select pg_temp.check_denied('a user cannot create an organization owned by someone else', $sql$
+  insert into public.organizations (legal_name, service_area_state, created_by)
+  values ('Impostor Org', 'MD', '00000000-0000-0000-0000-0000000000a1')
+$sql$);
+
+select pg_temp.check_eq('creating an organization does not reveal the others',
+  (select count(*) from public.documents), 0);
+
 reset role;
 \echo ''
 \echo '=== ALL TENANT ISOLATION CHECKS PASSED ====================================='
