@@ -1,16 +1,28 @@
 # ---------------------------------------------------------------------------
 # Copy to .env.local for `npm run dev`.
-# For Cloudflare, set these as Worker secrets instead — see docs/SETUP.md.
+# For Cloudflare, set the secrets with `wrangler secret put` — see the README.
 # Never commit real values. Never prefix a secret with NEXT_PUBLIC_.
+#
+# These names match Supabase's current key naming. The legacy `anon` and
+# `service_role` JWTs are being retired at the end of 2026; new projects issue
+# `sb_publishable_…` and `sb_secret_…` keys instead, and they behave the same
+# way — publishable is constrained by row-level security, secret bypasses it.
 # ---------------------------------------------------------------------------
 
-# Safe to expose to the browser. The anon key only ever acts as the signed-in
-# user, and every table is protected by row-level security.
+# --- Supabase: Project Settings → API keys ---------------------------------
+
+# Safe to expose to the browser. The publishable key only ever acts as the
+# signed-in user, and every table is protected by row-level security.
 NEXT_PUBLIC_SUPABASE_URL=https://YOUR-PROJECT.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 
 # SERVER ONLY. This key bypasses row-level security completely. It is used for
-# exactly two things: writing extracted page text, and minting short-lived
-# download links. If this ever reaches browser code, every organization's
-# private documents are readable by every user.
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+# exactly four things: writing extracted page text, writing the audit log,
+# minting short-lived download links, and resolving user ids to emails. If it
+# ever reaches browser code, every organization's private documents are
+# readable by every user.
+SUPABASE_SECRET_KEY=sb_secret_...
+
+# --- OpenAI: platform.openai.com/api-keys ----------------------------------
+# Not used until Milestone 2 (the verified fact library). Safe to set now.
+OPENAI_API_KEY=sk-proj-...

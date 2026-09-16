@@ -24,25 +24,56 @@ see [`docs/MILESTONES.md`](docs/MILESTONES.md).
 
 ## Quick start
 
+Needs Node 20+ and a free Supabase project.
+
 ```bash
 npm install
-cp .env.example .env.local     # fill in from your Supabase project
+cp .env.example .env.local     # fill in the three values, see below
 npm run dev
 ```
 
-Full walkthrough, including creating the Supabase project and running the
-migrations: [`docs/SETUP.md`](docs/SETUP.md).
+**Create the database.** In the Supabase dashboard, open **SQL Editor → New
+query**, paste the whole of `supabase/migrations/0001_core.sql` and run it, then
+do the same with `0002_storage.sql`. Order matters — the second file refers to
+tables the first one creates. Afterwards the Table Editor should list five
+tables, each with a green **RLS enabled** badge, and Storage should show a
+private `org-documents` bucket.
+
+**Fill in `.env.local`** from **Project Settings → API keys**:
+
+| Variable | Value | Sensitivity |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Project URL | Public |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Publishable key (`sb_publishable_…`) | Public — row-level security constrains it |
+| `SUPABASE_SECRET_KEY` | Secret key (`sb_secret_…`) | **Bypasses all security. Server only.** Never give it a `NEXT_PUBLIC_` name |
+
+Then <http://localhost:3000> — create an account, create your organization,
+upload a document.
+
+**To deploy:** `npx wrangler login`, put the two public values in the `vars`
+block of `wrangler.jsonc`, then `npx wrangler secret put SUPABASE_SECRET_KEY`
+and `npm run cf:deploy`. Add the resulting URL to Supabase's
+**Authentication → URL Configuration → Redirect URLs**.
 
 ## Verify it
 
 ```bash
-npm run test:rls        # 40 tenant isolation checks against a real Postgres
+npm run test:rls        # 47 tenant isolation checks against a real Postgres
 npm run test:extract    # 31 extraction and scan-detection checks
 ```
 
 `test:rls` is the exit condition for Milestone 1. It creates two organizations
-and four users and asserts forty things that must be impossible. Run it after
-any change to `supabase/migrations/`.
+and four users and asserts forty-seven things that must be impossible —
+cross-tenant reads and writes, volunteers opening financial documents, clients
+forging extracted page text, anyone editing the audit log.
+
+It runs the migrations as a deliberately **non-superuser** role, because a
+superuser bypasses row-level security unconditionally and would let a policy
+that denies everything in production pass the suite. That caught a real bug
+during development: `FORCE ROW LEVEL SECURITY` looked safer and would have made
+the membership check return false for every user on Supabase.
+
+Run it after any change to `supabase/migrations/`.
 
 ## Stack
 
@@ -65,16 +96,19 @@ supabase/tests/        Tenant isolation suite.
 src/lib/extract/       Turning uploaded bytes into citable page text.
 src/lib/supabase/      Three clients: user, browser, and service role.
 src/app/(app)/         Signed-in application.
-docs/                  Setup, security, decisions, milestones.
+docs/                  Decisions and their tradeoffs; the milestone plan.
 ```
 
 ## Reading order for a new contributor
 
-1. [`docs/SECURITY.md`](docs/SECURITY.md) — where each control lives
-2. `supabase/migrations/0001_core.sql` — the schema and every policy
-3. `supabase/tests/01_isolation.sql` — what must be impossible
-4. [`docs/DECISIONS.md`](docs/DECISIONS.md) — why it is built this way
-5. [`docs/MILESTONES.md`](docs/MILESTONES.md) — what comes next
+1. `supabase/migrations/0001_core.sql` — the schema, and every security policy
+2. `supabase/tests/01_isolation.sql` — what must be impossible
+3. [`docs/DECISIONS.md`](docs/DECISIONS.md) — why it is built this way
+4. [`docs/MILESTONES.md`](docs/MILESTONES.md) — what comes next
+
+The security model is not a separate document: it is the policies in
+`0001_core.sql` and the assertions in `01_isolation.sql`. Every policy has a
+comment above it saying what it is protecting against.
 
 ## Not being built
 
