@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'GrantPath',
+  title: 'Vouch',
   description:
     'A source-backed grant and reimbursement assistant for very small community nonprofits.',
 };

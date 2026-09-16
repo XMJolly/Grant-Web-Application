@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
   if (detected === 'unknown') {
     return fail(
       request,
-      'GrantPath accepts PDF and Word (.docx) files. That file is neither, whatever its name says.',
+      'Vouch accepts PDF and Word (.docx) files. That file is neither, whatever its name says.',
     );
   }
 

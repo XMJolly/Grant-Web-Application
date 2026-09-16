@@ -1,9 +1,9 @@
-# GrantPath
+# Vouch
 
 A source-backed grant and reimbursement assistant for very small community
 nonprofits that cannot afford a dedicated grant writer.
 
-The promise is narrow and specific: **GrantPath never silently invents an
+The promise is narrow and specific: **Vouch never silently invents an
 organizational fact.** Every factual statement links to an approved piece of
 evidence, uncertain information is flagged rather than filled in, and nothing
 reaches an export without a person approving it.

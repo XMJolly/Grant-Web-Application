@@ -1,7 +1,7 @@
 /**
  * Shared types and tuning constants for document text extraction.
  *
- * These thresholds decide whether GrantPath says "I read this document" or
+ * These thresholds decide whether Vouch says "I read this document" or
  * "I cannot read this document". Getting that wrong in the permissive direction
  * is the worst failure mode in the product: a scanned page that yields a few
  * stray characters of OCR noise would look like a successfully read document,
@@ -46,7 +46,7 @@ export const MIN_READABLE_PAGE_RATIO = 0.4;
 export const MIN_TOTAL_CHARS = 200;
 
 export const SCAN_MESSAGE =
-  'This document appears to be a scan or a set of page images. GrantPath can only read documents that contain real text, so no facts will be proposed from it. Please upload an original PDF or Word file if you have one — OCR for scanned documents is not built yet.';
+  'This document appears to be a scan or a set of page images. Vouch can only read documents that contain real text, so no facts will be proposed from it. Please upload an original PDF or Word file if you have one — OCR for scanned documents is not built yet.';
 
 /**
  * Decides whether an extraction is trustworthy enough to build facts on.

@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "grantpath",
+  "name": "vouch",
   "main": ".open-next/worker.js",
   "compatibility_date": "2025-03-25",
   // nodejs_compat is required by both the Next.js runtime and the PDF parser.
@@ -13,6 +13,6 @@
   "vars": {
     // Public values only. Secrets go in via `wrangler secret put`, never here.
     "NEXT_PUBLIC_SUPABASE_URL": "https://YOUR-PROJECT.supabase.co",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "your-anon-key"
+    "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY": "sb_publishable_..."
   }
 }

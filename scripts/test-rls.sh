@@ -14,7 +14,7 @@
 # -----------------------------------------------------------------------------
 set -euo pipefail
 
-DB="${GRANTPATH_TEST_DB:-grantpath_rls_test}"
+DB="${VOUCH_TEST_DB:-vouch_rls_test}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 if [ -n "${PSQL_CMD:-}" ]; then

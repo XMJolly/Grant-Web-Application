@@ -88,7 +88,7 @@ export default async function DocumentsPage({
           )}
 
           <Alert tone="info" title="About scanned files">
-            GrantPath only reads documents that contain real text. If you upload a scan, it is stored
+            Vouch only reads documents that contain real text. If you upload a scan, it is stored
             safely but marked unreadable rather than quietly producing nothing — OCR is planned, not
             built.
           </Alert>

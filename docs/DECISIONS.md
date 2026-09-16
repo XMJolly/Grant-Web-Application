@@ -67,7 +67,7 @@ No-Code **470**, Off-the-Shelf CRM **365**, and Custom Web App **265** — last.
 **Why.** The matrix weighted Data Security at 3 out of 100 and rated the
 low-code option "basic security" at 3/5. That weighting was reasonable for the
 system as scoped there: a single-organization opportunity tracker holding
-public grant listings. It is wrong for what GrantPath became. This product
+public grant listings. It is wrong for what Vouch became. This product
 holds multiple nonprofits' financial statements and board lists in one system,
 which makes tenant isolation the highest-stakes requirement, not a rounding
 error. **Assumption:** no low-code platform gives you Postgres row-level

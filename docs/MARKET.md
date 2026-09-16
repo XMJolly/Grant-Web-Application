@@ -16,7 +16,7 @@ This is the central problem, and it is structural rather than fixable by
 building a better product.
 
 **Fact.** 88% of US nonprofits operate on under $500K a year, and 59% on under
-$50K. That is the segment GrantPath targets.
+$50K. That is the segment Vouch targets.
 
 **Fact.** Those organisations receive about **0.4% of all foundation funding**,
 and only **22% of nonprofits under $50K received even one foundation grant
@@ -42,7 +42,7 @@ ceiling on its value.
 That Maryland Nonprofits number is the one that should give you pause. For
 $440 a year an organisation gets the GrantWatch database, DonorSearch prospect
 research, weekly funding alerts, a staffed helpline, discounted grant-writing
-consulting and a learning library. Any GrantPath subscription competes against
+consulting and a learning library. Any Vouch subscription competes against
 that bundle, not against Instrumentl.
 
 **Fact.** Grantable — a company whose entire business is this segment —
@@ -59,7 +59,7 @@ This was the most uncomfortable finding.
 **free**, and whose eligibility is: Maryland-based, 501(c)(3), **budget under
 $750,000**, fewer than 10 years old. It provides one-to-one technical
 assistance from nonprofit experts, trainings, templates and a help desk. That
-eligibility rule is close to a definition of GrantPath's target customer.
+eligibility rule is close to a definition of Vouch's target customer.
 
 **Fact.** In Southern Maryland specifically:
 - The **Nonprofit Institute at College of Southern Maryland** offers free
@@ -76,7 +76,7 @@ eligibility rule is close to a definition of GrantPath's target customer.
 open-RFP search, and an LOI generator, with free Foundation Directory
 Professional access at 2,180+ Funding Information Network locations.
 
-The implication is not that GrantPath is pointless. It is that **the problem is
+The implication is not that Vouch is pointless. It is that **the problem is
 already being addressed by heavily subsidised humans**, and a paid tool has to
 beat free expert help, not beat a spreadsheet.
 
@@ -131,7 +131,7 @@ markets "trained on 7,000+ winning proposals" — training data, not citation.
   departments." It ran a July 2025 press release attacking competitors' error
   rates.
 
-Sharke.ai is close to GrantPath's thesis, already shipped, with revenue-banded
+Sharke.ai is close to Vouch's thesis, already shipped, with revenue-banded
 pricing aimed at exactly this segment.
 
 **Assumption.** Neither has verifiable scale — no funding, team, or customer
@@ -228,7 +228,7 @@ the same things.
   trade dress
 - Signing up for a competitor's paid product to extract its database
 
-GrantPath's position is unusually clean: it came from your own capstone, your
+Vouch's position is unusually clean: it came from your own capstone, your
 own interview, and code written from scratch. Keep it that way — do not paste a
 competitor's page into a prompt and ask for something similar.
 
@@ -281,7 +281,7 @@ looks.
   was the tenant boundary.
 - **Fact: 23% of foundations will not accept AI-generated grant applications;
   10% will; 67% are undecided.** Any pitch has to survive a funder asking
-  whether AI wrote it. GrantPath's human-approval model is a good answer — say
+  whether AI wrote it. Vouch's human-approval model is a good answer — say
   so explicitly in marketing.
 - **Vendor data flow.** Nonprofit documents will go to OpenAI. Users must be
   told plainly, before Milestone 2 ships.

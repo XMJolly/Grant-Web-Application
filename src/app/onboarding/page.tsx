@@ -17,7 +17,7 @@ export default async function OnboardingPage() {
     <main className="flex min-h-screen items-center justify-center bg-canvas px-4 py-12">
       <div className="w-full max-w-lg">
         <div className="mb-8 text-center">
-          <p className="text-2xl font-semibold tracking-tight text-navy-900">GrantPath</p>
+          <p className="text-2xl font-semibold tracking-tight text-navy-900">Vouch</p>
           <p className="mt-1 text-sm text-ink-faint">One more step</p>
         </div>
         <CreateOrganizationForm />

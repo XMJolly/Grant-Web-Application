@@ -1,5 +1,5 @@
 -- =============================================================================
--- GrantPath — private document storage
+-- Vouch — private document storage
 --
 -- Bucket layout:  org-documents/<organization_id>/<document_id>/<file_name>
 --

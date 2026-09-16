@@ -36,7 +36,7 @@ export function CreateOrganizationForm() {
 
         <Field
           label="Primary state"
-          hint="Two-letter code. GrantPath’s first focus is Maryland."
+          hint="Two-letter code. Vouch’s first focus is Maryland."
           error={errors.service_area_state}
         >
           <Input

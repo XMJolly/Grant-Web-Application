@@ -3,7 +3,7 @@
  *
  * These run against real files rather than fixtures invented for the test,
  * because the thing being verified is a judgement call about messy real
- * documents: "can GrantPath actually read this, or is it a scan?".
+ * documents: "can Vouch actually read this, or is it a scan?".
  *
  * Put sample documents in `samples/` — see samples/README.md. Any that are
  * missing are skipped with a notice rather than failing the run, so the suite

@@ -22,7 +22,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     <div className="flex min-h-screen flex-col md:flex-row">
       <aside className="shrink-0 bg-navy-900 text-white md:w-64">
         <div className="px-5 py-5">
-          <p className="text-lg font-semibold tracking-tight">GrantPath</p>
+          <p className="text-lg font-semibold tracking-tight">Vouch</p>
           <p className="mt-0.5 truncate text-xs text-white/60">
             {session.organization.legal_name}
           </p>

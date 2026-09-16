@@ -1,4 +1,4 @@
-# Setting up GrantPath
+# Setting up Vouch
 
 Start to finish, assuming nothing is installed yet. Roughly 45 minutes.
 
@@ -9,7 +9,7 @@ You need [Node.js 20 or newer](https://nodejs.org). Check with `node -v`.
 ## 1. Install the project
 
 ```bash
-cd grantpath
+cd vouch
 npm install
 ```
 
@@ -52,8 +52,8 @@ sign in immediately. Turn it back on before anyone else uses the system.
 | Value | Where it goes | Notes |
 |---|---|---|
 | Project URL | `NEXT_PUBLIC_SUPABASE_URL` | Safe to expose |
-| `anon` / publishable key | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Safe to expose — it can only ever act as the signed-in user |
-| `service_role` / secret key | `SUPABASE_SERVICE_ROLE_KEY` | **Secret.** Bypasses all security. Server only, never in a `NEXT_PUBLIC_` variable, never committed |
+| Publishable key (`sb_publishable_…`) | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Safe to expose — it can only ever act as the signed-in user |
+| Secret key (`sb_secret_…`) | `SUPABASE_SECRET_KEY` | **Secret.** Bypasses all security. Server only, never in a `NEXT_PUBLIC_` variable, never committed |
 
 ```bash
 cp .env.example .env.local
@@ -111,13 +111,13 @@ npx wrangler login
 ```
 
 Edit `wrangler.jsonc` and replace the two placeholder values under `vars` with
-your real Supabase URL and anon key. These are public values; they belong in
+your real Supabase URL and publishable key. These are public values; they belong in
 the config file.
 
 The secret does not:
 
 ```bash
-npx wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+npx wrangler secret put SUPABASE_SECRET_KEY
 ```
 
 Then:
@@ -155,8 +155,8 @@ The database refused a write. Usually your role is too low (volunteers cannot
 upload) or the `organization_id` did not match your membership.
 
 **Uploads fail on Cloudflare but work locally**
-The service-role secret was not set on the Worker. Run
-`npx wrangler secret put SUPABASE_SERVICE_ROLE_KEY`.
+The secret key was not set on the Worker. Run
+`npx wrangler secret put SUPABASE_SECRET_KEY`.
 
 **A large PDF times out on Cloudflare**
 Text extraction currently runs inside the upload request. Workers cap CPU time

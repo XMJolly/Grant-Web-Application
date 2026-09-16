@@ -1,5 +1,5 @@
 -- =============================================================================
--- GrantPath — Milestone 1 core schema
+-- Vouch — Milestone 1 core schema
 -- Tenant boundary, membership + roles, private documents, page text, audit log.
 --
 -- Design rules enforced here (from the project handoff, §13 Security & Privacy):

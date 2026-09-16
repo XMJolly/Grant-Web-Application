@@ -1,5 +1,5 @@
 -- =============================================================================
--- GrantPath — tenant isolation test suite
+-- Vouch — tenant isolation test suite
 --
 -- The exit condition for Milestone 1. Two organizations, four users, and a list
 -- of things that must be impossible. Every check raises on failure, so the whole

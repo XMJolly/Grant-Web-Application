@@ -1,6 +1,6 @@
 # Security model
 
-GrantPath holds several nonprofits' financial statements, board lists and
+Vouch holds several nonprofits' financial statements, board lists and
 determination letters in one database. This document says where each control
 lives and how to verify it still works.
 
@@ -57,9 +57,10 @@ npm run test:rls    # must fail
 git checkout supabase/migrations/0001_core.sql
 ```
 
-## The service-role key
+## The secret key
 
-`SUPABASE_SERVICE_ROLE_KEY` bypasses row-level security completely. Anyone
+`SUPABASE_SECRET_KEY` (Supabase's new-format `sb_secret_…`, which replaces the legacy
+`service_role` JWT) bypasses row-level security completely. Anyone
 holding it can read every nonprofit's documents.
 
 It is used in exactly four places, all server-side:
@@ -70,11 +71,11 @@ It is used in exactly four places, all server-side:
 4. `src/app/(app)/members/page.tsx` — resolving user ids to email addresses
 
 Every one of those first establishes the caller's identity and organization
-with the **user** client, and uses the service role only for work that RLS
+with the **user** client, and uses the secret key only for work that RLS
 deliberately forbids clients from doing at all.
 
 Two guards: `src/lib/supabase/admin.ts` imports `server-only`, so the build
-fails if it is ever reached from a client component; and `serviceRoleKey()`
+fails if it is ever reached from a client component; and `secretKey()`
 throws if called where `window` exists. Never give it a `NEXT_PUBLIC_` name —
 that prefix is what tells Next.js to inline a value into browser JavaScript.
 
@@ -121,7 +122,7 @@ availability.
 
 ## If something goes wrong
 
-1. Rotate the service-role key in the Supabase dashboard, and re-set the Worker
+1. Rotate the secret key in the Supabase dashboard, and re-set the Worker
    secret.
 2. `audit_events` records who did what, when. It is append-only and no user
    role can alter it.

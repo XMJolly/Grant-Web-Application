@@ -59,7 +59,7 @@ export default async function DashboardPage() {
 
       <div className="mb-6 grid gap-4 sm:grid-cols-3">
         <Stat label="Documents" value={documentCount ?? 0} />
-        <Stat label="Readable by GrantPath" value={readableCount ?? 0} />
+        <Stat label="Readable by Vouch" value={readableCount ?? 0} />
         <Stat label="Profile details still needed" value={missing.length} tone={missing.length ? 'warn' : 'verified'} />
       </div>
 

@@ -73,7 +73,7 @@ export default async function DocumentDetailPage({
 
       <Card
         title="Extracted text"
-        description="This is exactly what GrantPath can read. Every fact it later proposes will point back to one of these pages."
+        description="This is exactly what Vouch can read. Every fact it later proposes will point back to one of these pages."
       >
         {!pages || pages.length === 0 ? (
           <p className="text-sm text-ink-faint">

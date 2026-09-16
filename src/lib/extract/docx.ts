@@ -152,7 +152,7 @@ export async function extractDocx(bytes: Uint8Array): Promise<ExtractionResult> 
       pages: [],
       hasTextLayer: false,
       failureReason:
-        'No readable text was found in this Word document. If the content is a pasted image or a scan, GrantPath cannot read it yet.',
+        'No readable text was found in this Word document. If the content is a pasted image or a scan, Vouch cannot read it yet.',
     };
   }
 
