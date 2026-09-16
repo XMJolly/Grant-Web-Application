@@ -1,2 +1,0 @@
-Drop three PNGs here — dashboard.png, documents.png, scanned-document.png.
-The README links to them by those exact names.
